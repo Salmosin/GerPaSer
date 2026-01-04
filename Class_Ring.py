@@ -1,16 +1,6 @@
 import matplotlib.pyplot as plt
 import math
-
-class Dot(object):
-    def __init__(self, koordinata_x, koordinata_y):
-        self.x = koordinata_x
-        self.y = koordinata_y
-
-    def __str__(self):
-        return self.x, self.y
-
-    def print(self):
-        print(self.__str__())
+from Class_Tochka import Dot
 
 class Ring(Dot):
     def __init__(self, koordinata_x, koordinata_y, minor_radius, major_radius):
@@ -66,10 +56,5 @@ class Ring(Dot):
         koordinati_y = [tochka.y for tochka in tochki]
         plt.scatter(koordinati_x,koordinati_y,s=100, c='green', alpha=0.7, edgecolors='black')
         plt.show()
-lol = Dot(1,1)
-lol.print()
 
-Rum = Ring(230,125, 4, 6)
-Rum.vivod_lista()
-Rum.risunok()
 
