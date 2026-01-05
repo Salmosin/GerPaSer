@@ -42,10 +42,11 @@ class Ring(Dot):
 
     def vivod_lista(self):
         all_points = self.list()
-        return all_points
-        #current = 0
-        #for point in all_points:
-        #    current += 1
-        #    print(current, '|', f"{point.x:.3f}", "|", f"{point.y:.3f}")
+        current = 0
+        massiv_points = np.zeros((2,len(all_points)))
+        for point in all_points:
+            current += 1
+            massiv_points[0,:] = point.x
+            massiv_points[1,:] = point.y
 
 
