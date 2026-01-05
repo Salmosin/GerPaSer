@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import math
 from Class_Tochka import Dot
 
@@ -43,18 +42,10 @@ class Ring(Dot):
 
     def vivod_lista(self):
         all_points = self.list()
-        current = 0
-        for point in all_points:
-            current += 1
-            print(current, '|', f"{point.x:.3f}", "|", f"{point.y:.3f}")
-
-    def risunok(self):
-        tochki = self.list()
-        plt.figure(figsize=(self.major, self.major))
-
-        koordinati_x = [tochka.x for tochka in tochki]
-        koordinati_y = [tochka.y for tochka in tochki]
-        plt.scatter(koordinati_x,koordinati_y,s=100, c='green', alpha=0.7, edgecolors='black')
-        plt.show()
+        return all_points
+        #current = 0
+        #for point in all_points:
+        #    current += 1
+        #    print(current, '|', f"{point.x:.3f}", "|", f"{point.y:.3f}")
 
 
