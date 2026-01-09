@@ -90,8 +90,7 @@ def get_butcher_tableau(table_id: ButcherID) -> ButcherTableau:
 # ButcherID.TABLE_4_1
 
 SELECTED_METHOD = ButcherID.TABLE_4_1  # <--- МЕНЯТЬ ЗДЕСЬ
-
-
+current_tableau = get_butcher_tableau(SELECTED_METHOD)
 # --- Запуск ---
 if __name__ == "__main__":
     # 1. Получаем таблицу напрямую, без вопросов в терминале

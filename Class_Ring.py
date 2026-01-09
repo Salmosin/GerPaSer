@@ -1,5 +1,7 @@
 import math
+import numpy as np
 from Class_Tochka import Dot
+
 
 class Ring(Dot):
     def __init__(self, koordinata_x, koordinata_y, minor_radius, major_radius):
@@ -42,11 +44,22 @@ class Ring(Dot):
 
     def vivod_lista(self):
         all_points = self.list()
-        current = 0
+        current = -1
         massiv_points = np.zeros((2,len(all_points)))
         for point in all_points:
             current += 1
-            massiv_points[0,:] = point.x
-            massiv_points[1,:] = point.y
+            massiv_points[0,current] = point.x
+            massiv_points[1,current] = point.y
+        return  massiv_points
+    def print_table (self):
+        print('x   |   y')
+        massiv_tochek = self.vivod_lista()
+        dlina = len(self.list()) - 1
+        tochka = -1
+        while tochka < dlina:
+            tochka+=1
+            print(f'{massiv_tochek[0,tochka]:.3f}', f'{massiv_tochek[1,tochka]:.3f}')
+
+
 
 
