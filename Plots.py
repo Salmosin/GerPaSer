@@ -31,8 +31,8 @@ def risunok_velo(x1, x2, t):
 
         plt.show()
 def simple_streamlines(t):
-    x1 = np.linspace(-3, 3, 20)
-    x2 = np.linspace(-3, 3, 20)
+    x1 = np.linspace(0, 3, 20)
+    x2 = np.linspace(0, 3, 20)
     X1, X2 = np.meshgrid(x1, x2)
     V1 = -t * X1
     V2 = -np.sin(t) * X2
@@ -45,3 +45,13 @@ def risunok_trtr(x1, x2,t):
                 plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
         plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
         plt.show()
+
+def risunok_lines(x1, x2, t, h, ID_Butcher):
+            ang1 = np.zeros(len(x1))
+            ang2 = np.zeros(len(x2))
+            for i in range(len(x1)):
+                ang1[i] = RangeKutta(x1[i], t, h, MotionLaw1, ID_Butcher)
+                ang2[i] = RangeKutta(x2[i], t, h, MotionLaw2, ID_Butcher)
+            for i in range(len(x2)):
+                plt.plot([x1[i], ang1[i]], [x2[i], ang2[i]], 'b')
+            plt.show()

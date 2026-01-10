@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 from Butcher import get_num_butcher
 from Class_Ring import Ring
-from Plots import risunok_taj, risunok_velo, simple_streamlines, risunok_trtr
+from Plots import risunok_taj, risunok_velo, simple_streamlines, risunok_trtr, risunok_lines
 from Time import TimeList
 from Trajectory import TrajectoryByX
 from Trajectory import TrajectoryByY
@@ -31,6 +31,6 @@ for i in range(len(all_ring[0])):
 #risunok(koord_X,koord_Y,time_step)
 
 #risunok_velo(koord_X,koord_Y,t)
-
-simple_streamlines(t_local)
-risunok_trtr(koord_X,koord_Y,time_num)
+risunok_lines(koord_X[:,time_num],koord_Y[:,time_num],t_local,h,get_num_butcher(5))
+#simple_streamlines(t_local)
+#risunok_trtr(koord_X,koord_Y,time_num)
