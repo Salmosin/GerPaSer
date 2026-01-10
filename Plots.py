@@ -1,4 +1,4 @@
-import cmath
+import math
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,32 +7,41 @@ from Integrator import RangeKutta
 from Motion import MotionLaw1
 from Motion import MotionLaw2
 
-def risunok(x1, x2, t):
-        for i in range(len(t)):
-                plt.plot(x1[i], x2[i], 'r-')
+def risunok_taj(x1, x2,num_step):
+        for i in range(num_step):
+                plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
+        plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
+        plt.scatter(x1[:, num_step-1], x2[:, num_step-1], s=10, c='blue', alpha=1, marker='o')
         plt.show()
-def risunok_velo(x1,x2,t):
-        v1 = np.zeros(len(t))
-        v2 = np.zeros(len(t))
-        for i in range(len(t)):
-                v1[i] = MotionLaw1(t[i],x1[i])
-                v2[i] = MotionLaw2(t[i],x2[i])
-        for i in range(len(t)):
-                plt.plot(v1[i], v2[i], 'b-')
-        plt.show()
-def risunok_lines(x1,x2,t,x0,h):
-        v1 = np.zeros(len(t))
-        v2 = np.zeros(len(t))
-        sl1 = np.zeros(len(t))
-        sl2 = np.zeros(len(t))
-        for i in range(len(t)):
-                v1[i] = MotionLaw1(t,x1[i])
-                v2[i] = MotionLaw2(t,x2[i])
-                ang = RangeKutta(x0,t,h,MotionLaw1)
-                sl1[i] = v1[i] + 1 / cmath.sqrt(1 + ang ** 2)
-                sl2[i] = v2[i] + ang / cmath.sqrt(1 + ang ** 2)
-        for i in range(len(t)):
-                plt.plot([v1[i], sl1[i]], [v2[i], sl2[i]], 'b-')
-                plt.plot(v1[i], v2[i], 'ro', )
-        plt.show()
+def risunok_velo(x1, x2, t):
+        len1 = len(x1[0])
+        len2 = len(x1[1])
+        v1 = np.zeros((len1,len2))
+        v2 = np.zeros((len1,len2))
+        for i in range(len1):
+                for j in range(len2):
+                        v1[i, j] = MotionLaw1(t[j], x1[i, j])
+                        v2[i, j] = MotionLaw2(t[j], x2[i, j])
+        for i in range(len2):
+                plt.scatter(v1[:, i], v2[:, i], s=10, c='green', alpha=1, marker='o')
+        plt.scatter(v1[:, 0], v2[:, 0], s=10, c='red', alpha=1, marker='o')
+        plt.scatter(v1[:, len2-1], v2[:, len2-1], s=10, c='blue', alpha=1, marker='o')
+        print(v1[:, len2-1])
+        print(v2[:, len2-1])
 
+        plt.show()
+def simple_streamlines(t):
+    x1 = np.linspace(-3, 3, 20)
+    x2 = np.linspace(-3, 3, 20)
+    X1, X2 = np.meshgrid(x1, x2)
+    V1 = -t * X1
+    V2 = -np.sin(t) * X2
+    plt.figure(figsize=(10, 8))
+    plt.streamplot(X1, X2, V1, V2,color=np.sqrt(V1**2 + V2**2), cmap='viridis',linewidth=1,arrowsize=1.5,density=2)
+    plt.grid(True, alpha=0.3)
+    plt.show()
+def risunok_trtr(x1, x2,t):
+        for i in range(t):
+                plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
+        plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
+        plt.show()

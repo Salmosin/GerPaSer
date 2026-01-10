@@ -72,8 +72,19 @@ _TABLES = {
 }
 
 # --- 4. Логика получения таблицы ---
-def get_butcher_tableau(table_id: ButcherID) -> ButcherTableau:
+def get_butcher_tableau(table_id: ButcherID):
     return _TABLES[table_id]
+
+def get_num_butcher(n):
+    Vector_myasnika = [
+        ButcherID.TABLE_2_1,
+        ButcherID.TABLE_2_2,
+        ButcherID.TABLE_3_1,
+        ButcherID.TABLE_3_2,
+        ButcherID.TABLE_3_3,
+        ButcherID.TABLE_4_1]
+    return Vector_myasnika[n]
+
 
 
 # ==========================================
@@ -90,8 +101,7 @@ def get_butcher_tableau(table_id: ButcherID) -> ButcherTableau:
 # ButcherID.TABLE_4_1
 
 SELECTED_METHOD = ButcherID.TABLE_4_1  # <--- МЕНЯТЬ ЗДЕСЬ
-
-
+current_tableau = get_butcher_tableau(SELECTED_METHOD)
 # --- Запуск ---
 if __name__ == "__main__":
     # 1. Получаем таблицу напрямую, без вопросов в терминале
