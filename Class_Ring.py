@@ -10,7 +10,7 @@ class Ring(Dot):
         self.minor = minor_radius
         self.major = major_radius
         self.middle= (minor_radius+major_radius)/2
-        self.points = self._generate_points_(45)
+        self.points = self._generate_points_(8)
 
     def _generate_points_(self, number_of_points_in_row):
         points = []
@@ -59,7 +59,4 @@ class Ring(Dot):
         while tochka < dlina:
             tochka+=1
             print(f'{massiv_tochek[0,tochka]:.3f}', f'{massiv_tochek[1,tochka]:.3f}')
-
-
-
 
