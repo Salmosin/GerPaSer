@@ -60,6 +60,3 @@ class Ring(Dot):
             tochka+=1
             print(f'{massiv_tochek[0,tochka]:.3f}', f'{massiv_tochek[1,tochka]:.3f}')
 
-
-
-

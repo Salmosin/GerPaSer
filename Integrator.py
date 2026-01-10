@@ -1,11 +1,14 @@
 import numpy as np
 
+from Butcher import get_butcher_tableau
+
 def RangeKutta(x,t,h,func,Butcher):
-    l = Butcher.length()
+    Tabl_B = get_butcher_tableau(Butcher)
+    l = Tabl_B.length()
     f = np.zeros(l)
-    A = Butcher.coeffsA()
-    c = Butcher.coeffsC()
-    b = Butcher.coeffsB()
+    A = Tabl_B.coeffsA()
+    c = Tabl_B.coeffsC()
+    b = Tabl_B.coeffsB()
 
     #Ранге-Кутт для системы с таблицой Бутчера извне
     for i in range(l):
