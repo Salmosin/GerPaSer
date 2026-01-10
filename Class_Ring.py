@@ -10,7 +10,7 @@ class Ring(Dot):
         self.minor = minor_radius
         self.major = major_radius
         self.middle= (minor_radius+major_radius)/2
-        self.points = self._generate_points_(8)
+        self.points = self._generate_points_(45)
 
     def _generate_points_(self, number_of_points_in_row):
         points = []
