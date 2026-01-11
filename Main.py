@@ -1,8 +1,6 @@
-import matplotlib.pyplot as plt
-
 from Butcher import get_num_butcher
 from Class_Ring import Ring
-from Plots import risunok_taj, risunok_velo, simple_streamlines, risunok_trtr
+from Plots import risunok_taj, risunok_velo, simple_streamlines, risunok_trtr, risunok_lines, simple_velo
 from Time import TimeList
 from Trajectory import TrajectoryByX
 from Trajectory import TrajectoryByY
@@ -10,7 +8,7 @@ import numpy as np
 x10 = 230
 x20 = 125
 but_num = 3
-time_num = 20
+time_num = 20 #20 40 60 80 90
 time_step = 100
 ID_BUTCHER = get_num_butcher(but_num)
 Rum = Ring(x10,x20, 4, 6)
@@ -32,5 +30,8 @@ for i in range(len(all_ring[0])):
 
 #risunok_velo(koord_X,koord_Y,t)
 
-simple_streamlines(t_local)
-risunok_trtr(koord_X,koord_Y,time_num)
+risunok_lines(t_local,h,time_num,get_num_butcher(5)) #линии тока самодельные
+#simple_streamlines(t_local) #линии тока функцией
+
+#risunok_trtr(koord_X,koord_Y,time_num) #положение в определенный момент времени + предыдущие
+#simple_velo(koord_X,koord_Y,t,time_num) #скорость в определенный момент времени + предыдущие

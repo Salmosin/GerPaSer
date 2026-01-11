@@ -1,5 +1,3 @@
-import math
-
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -31,8 +29,8 @@ def risunok_velo(x1, x2, t):
 
         plt.show()
 def simple_streamlines(t):
-    x1 = np.linspace(-3, 3, 20)
-    x2 = np.linspace(-3, 3, 20)
+    x1 = np.linspace(0, 240, 50)
+    x2 = np.linspace(0, 140, 50)
     X1, X2 = np.meshgrid(x1, x2)
     V1 = -t * X1
     V2 = -np.sin(t) * X2
@@ -40,8 +38,38 @@ def simple_streamlines(t):
     plt.streamplot(X1, X2, V1, V2,color=np.sqrt(V1**2 + V2**2), cmap='viridis',linewidth=1,arrowsize=1.5,density=2)
     plt.grid(True, alpha=0.3)
     plt.show()
-def risunok_trtr(x1, x2,t):
-        for i in range(t):
-                plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
-        plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
-        plt.show()
+def simple_velo(x1, x2,t,t_local):
+    len1 = len(x1[0])
+    v1 = np.zeros((len1, t_local))
+    v2 = np.zeros((len1, t_local))
+    for i in range(len1):
+        for j in range(t_local):
+            v1[i, j] = MotionLaw1(t[j], x1[i, j])
+            v2[i, j] = MotionLaw2(t[j], x2[i, j])
+    for i in range(t_local):
+            plt.scatter(v1[:, i], v2[:, i], s=10, c='green', alpha=1, marker='o')
+    plt.scatter(v1[:, 0], v2[:, 0], s=10, c='red', alpha=1, marker='o')
+    plt.show()
+
+def risunok_trtr(x1, x2, t):
+    for i in range(t):
+        plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
+    plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
+    plt.show()
+
+def risunok_lines(t, h, t_l, ID_Butcher):
+    x1 = np.linspace(50, 250, 50)
+    x2 = np.linspace(140, 0, 50)
+
+    ang1 = np.zeros(len(x1))
+    ang2 = np.zeros(len(x1))
+    x11 = np.zeros(len(x1))
+    x22 = np.zeros(len(x1))
+    for i in range(len(x1)):
+        ang1[i] = RangeKutta(x1[i], t, h, MotionLaw1, ID_Butcher)
+        ang2[i] = RangeKutta(x2[i], t, h, MotionLaw2, ID_Butcher)
+        x11[i] = x1[i] + (ang1[i] - x1[i]) * (100-t_l)
+        x22[i] = x2[i] + (ang2[i] - x2[i]) * (100-t_l)
+    for i in range(len(x2)):
+        plt.plot([x1[i], x11[i]], [x2[i], x22[i]], 'b')
+    plt.show()
