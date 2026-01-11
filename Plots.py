@@ -7,51 +7,51 @@ from Integrator import RangeKutta
 from Motion import MotionLaw1
 from Motion import MotionLaw2
 
-def risunok_taj(x1, x2,num_step):
+def risunok_taj(tekushi_x1, tekushi_x2, num_step):
         for i in range(num_step):
-                plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
-        plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
-        plt.scatter(x1[:, num_step-1], x2[:, num_step-1], s=10, c='blue', alpha=1, marker='o')
+                plt.scatter(tekushi_x1[:, i], tekushi_x2[:, i], s=10, c='green', alpha=1, marker='o')
+        plt.scatter(tekushi_x1[:, 0], tekushi_x2[:, 0], s=10, c='red', alpha=1, marker='o')
+        plt.scatter(tekushi_x1[:, num_step - 1], tekushi_x2[:, num_step - 1], s=10, c='blue', alpha=1, marker='o')
         plt.show()
-def risunok_velo(x1, x2, t):
-        len1 = len(x1[0])
-        len2 = len(x1[1])
-        v1 = np.zeros((len1,len2))
-        v2 = np.zeros((len1,len2))
+def risunok_velo(tekushi_x1, tekushi_x2, time):
+        len1 = len(tekushi_x1[0])
+        len2 = len(tekushi_x1[1])
+        velosity_vector_1 = np.zeros((len1, len2))
+        velosity_vector_2 = np.zeros((len1, len2))
         for i in range(len1):
                 for j in range(len2):
-                        v1[i, j] = MotionLaw1(t[j], x1[i, j])
-                        v2[i, j] = MotionLaw2(t[j], x2[i, j])
+                        velosity_vector_1[i, j] = MotionLaw1(time[j], tekushi_x1[i, j])
+                        velosity_vector_2[i, j] = MotionLaw2(time[j], tekushi_x2[i, j])
         for i in range(len2):
-                plt.scatter(v1[:, i], v2[:, i], s=10, c='green', alpha=1, marker='o')
-        plt.scatter(v1[:, 0], v2[:, 0], s=10, c='red', alpha=1, marker='o')
-        plt.scatter(v1[:, len2-1], v2[:, len2-1], s=10, c='blue', alpha=1, marker='o')
-        print(v1[:, len2-1])
-        print(v2[:, len2-1])
+                plt.scatter(velosity_vector_1[:, i], velosity_vector_2[:, i], s=10, c='green', alpha=1, marker='o')
+        plt.scatter(velosity_vector_1[:, 0], velosity_vector_2[:, 0], s=10, c='red', alpha=1, marker='o')
+        plt.scatter(velosity_vector_1[:, len2 - 1], velosity_vector_2[:, len2 - 1], s=10, c='blue', alpha=1, marker='o')
+        print(velosity_vector_1[:, len2 - 1])
+        print(velosity_vector_2[:, len2 - 1])
 
         plt.show()
-def simple_streamlines(t):
-    x1 = np.linspace(0, 3, 20)
-    x2 = np.linspace(0, 3, 20)
-    X1, X2 = np.meshgrid(x1, x2)
-    V1 = -t * X1
-    V2 = -np.sin(t) * X2
+def simple_streamlines(time):
+    tekushi_x1 = np.linspace(0, 3, 20)
+    tekushi_x2 = np.linspace(0, 3, 20)
+    tekushi_X1, tekushi_X2 = np.meshgrid(tekushi_x1, tekushi_x2)
+    V1 = -time * tekushi_X1                                                                #хз как эту скорость назвать
+    V2 = -np.sin(time) * tekushi_X2                                                        #хз как эту скорость назвать
     plt.figure(figsize=(10, 8))
-    plt.streamplot(X1, X2, V1, V2,color=np.sqrt(V1**2 + V2**2), cmap='viridis',linewidth=1,arrowsize=1.5,density=2)
+    plt.streamplot(tekushi_X1, tekushi_X2, V1, V2, color=np.sqrt(V1 ** 2 + V2 ** 2), cmap='viridis', linewidth=1, arrowsize=1.5, density=2)
     plt.grid(True, alpha=0.3)
     plt.show()
-def risunok_trtr(x1, x2,t):
-        for i in range(t):
-                plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
-        plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
+def risunok_trtr(koord_x1, koord_x2,time):
+        for i in range(time):
+                plt.scatter(koord_x1[:, i], koord_x2[:, i], s=10, c='green', alpha=1, marker='o')
+        plt.scatter(koord_x1[:, 0], koord_x2[:, 0], s=10, c='red', alpha=1, marker='o')
         plt.show()
 
-def risunok_lines(x1, x2, t, h, ID_Butcher):
-            ang1 = np.zeros(len(x1))
-            ang2 = np.zeros(len(x2))
-            for i in range(len(x1)):
-                ang1[i] = RangeKutta(x1[i], t, h, MotionLaw1, ID_Butcher)
-                ang2[i] = RangeKutta(x2[i], t, h, MotionLaw2, ID_Butcher)
-            for i in range(len(x2)):
-                plt.plot([x1[i], ang1[i]], [x2[i], ang2[i]], 'b')
+def risunok_lines(koord_x1, koord_x2, time, shag, ID_Butcher):
+            ang1 = np.zeros(len(koord_x1))
+            ang2 = np.zeros(len(koord_x2))
+            for i in range(len(koord_x1)):
+                ang1[i] = RangeKutta(koord_x1[i], time, shag, MotionLaw1, ID_Butcher)
+                ang2[i] = RangeKutta(koord_x2[i], time, shag, MotionLaw2, ID_Butcher)
+            for i in range(len(koord_x2)):
+                plt.plot([koord_x1[i], ang1[i]], [koord_x2[i], ang2[i]], 'b')
             plt.show()
