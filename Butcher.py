@@ -4,23 +4,23 @@ from enum import Enum
 # --- 1. Сущность "Таблица Бутчера" ---
 class ButcherTableau:
     def __init__(self, a, b, c, name=""):
-        self.A = np.array(a)
-        self.b = np.array(b)
-        self.c = np.array(c)
-        self.l = len(b)
+        self.matrix_A = np.array(a)
+        self.weights_b = np.array(b)
+        self.time_steps_c = np.array(c)
+        self.num_stages_l = len(b)
         self.name = name
 
     def length(self):
-        return self.l
+        return self.num_stages_l
 
     def coeffsA(self):
-        return self.A
+        return self.matrix_A
 
     def coeffsB(self):
-        return self.b
+        return self.weights_b
 
     def coeffsC(self):
-        return self.c
+        return self.time_steps_c
 
 # --- 2. Перечисление (Enum) вариантов ---
 class ButcherID(Enum):
