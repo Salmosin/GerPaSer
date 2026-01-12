@@ -24,9 +24,6 @@ def risunok_velo(history_x1, history_x2, time):
                 plt.scatter(velosity_1[:, i], velosity_2[:, i], s=10, c='green', alpha=1, marker='o')
         plt.scatter(velosity_1[:, 0], velosity_2[:, 0], s=10, c='red', alpha=1, marker='o')
         plt.scatter(velosity_1[:, len2-1], velosity_2[:, len2-1], s=10, c='blue', alpha=1, marker='o')
-        print(velosity_1[:, len2-1])
-        print(velosity_2[:, len2-1])
-
         plt.show()
 def simple_streamlines(t):
     x1 = np.linspace(0, 240, 50)
