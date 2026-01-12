@@ -5,10 +5,10 @@ from Time import TimeList
 from Trajectory import TrajectoryByX
 from Trajectory import TrajectoryByY
 import numpy as np
-x10 = 230
-x20 = 125
-but_num = 3
-time_num = 20 #20 40 60 80 90
+start_koord_x10 = 230
+start_koord_x20 = 125
+butcher_num = 3
+time_num = 80 #20 40 60 80 90
 time_step = 100
 ID_BUTCHER = get_num_butcher(butcher_num)
 Rum = Ring(start_koord_x10,start_koord_x20, 4, 6)
@@ -26,12 +26,12 @@ for i in range(len(all_ring[0])):
         koord_X[i, j] = koord_1[j]
         koord_Y[i, j] = koord_2[j]
 
-#risunok(koord_X,koord_Y,time_step)
+risunok_taj(koord_X,koord_Y,time_step)#траектория полная
 
-#risunok_velo(koord_X,koord_Y,t)
+risunok_velo(koord_X,koord_Y,time)#скорось полная
 
-risunok_lines(t_local,h,time_num,get_num_butcher(5)) #линии тока самодельные
-#simple_streamlines(t_local) #линии тока функцией
+risunok_lines(time_local, shag,time_num,get_num_butcher(5)) #линии тока самодельные
+simple_streamlines(time_local) #линии тока функцией
 
-#risunok_trtr(koord_X,koord_Y,time_num) #положение в определенный момент времени + предыдущие
-#simple_velo(koord_X,koord_Y,t,time_num) #скорость в определенный момент времени + предыдущие
+risunok_trtr(koord_X,koord_Y,time_num) #положение в определенный момент времени + предыдущие
+simple_velo(koord_X,koord_Y, time,time_num) #скорость в определенный момент времени + предыдущие
