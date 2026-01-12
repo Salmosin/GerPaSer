@@ -31,9 +31,9 @@ def risunok_velo(history_x1, history_x2, time):
 def simple_streamlines(t):
     x1 = np.linspace(0, 240, 50)
     x2 = np.linspace(0, 140, 50)
-    X1, X2 = np.meshgrid(x1, x2)
-    V1 = -t * X1
-    V2 = -np.sin(t) * X2
+    koord_X1, koord_X2 = np.meshgrid(x1, x2)
+    Velosity_1 = -t * koord_X1
+    Velosity_2 = -np.sin(t) * koord_X2
     plt.figure(figsize=(10, 8))
     plt.streamplot(koord_X1, koord_X2, Velosity_1, Velosity_2,color=np.sqrt(Velosity_1**2 + Velosity_2**2), cmap='viridis',linewidth=1,arrowsize=1.5,density=2)
     plt.grid(True, alpha=0.3)
@@ -49,12 +49,14 @@ def simple_velo(x1, x2,t,t_local):
     for i in range(t_local):
             plt.scatter(v1[:, i], v2[:, i], s=10, c='green', alpha=1, marker='o')
     plt.scatter(v1[:, 0], v2[:, 0], s=10, c='red', alpha=1, marker='o')
+    plt.scatter(v1[:, t_local-1], v2[:, t_local-1], s=10, c='blue', alpha=1, marker='o')
     plt.show()
 
 def risunok_trtr(x1, x2, t):
     for i in range(t):
         plt.scatter(x1[:, i], x2[:, i], s=10, c='green', alpha=1, marker='o')
     plt.scatter(x1[:, 0], x2[:, 0], s=10, c='red', alpha=1, marker='o')
+    plt.scatter(x1[:, t], x2[:, t], s=10, c='blue', alpha=1, marker='o')
     plt.show()
 
 def risunok_lines(t, h, t_l, ID_Butcher):
