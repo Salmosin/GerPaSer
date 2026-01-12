@@ -85,4 +85,3 @@ def get_num_butcher(n):
         ButcherID.TABLE_4_1]
     return Vector_myasnika[n]
 
-
